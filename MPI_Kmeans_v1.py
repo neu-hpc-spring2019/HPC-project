@@ -153,9 +153,14 @@ data_all = np.concatenate((data,data1,data2,data3),axis = 0) #the final dataset 
 #read size and node number(rank)
 
 #data = data_all # we already konw data right now
-#data = np.load("MNIST-encoded.npy")
-#data = np.load("CSV.npy")
-data = np.load("MNIST-784.npy")
+#data = np.load("MNIST-encoded.npy") #for MNIST
+##########normolization of CSV
+data = np.load("CSV.npy")
+for i in range(np.size(data,0)):
+  for j in range(np.size(data,1)):
+    data[i,j] = data[i,j]/max(data[:,j])
+##########noemalization of CSV
+#data = np.load("MNIST-784.npy")
 #print(data[0,:])
 if rank == 0:
   k_use = set_K()
